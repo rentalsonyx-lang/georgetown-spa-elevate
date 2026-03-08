@@ -1,25 +1,16 @@
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Phone, AlertCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import browsImg from "@/assets/brows-service.jpg";
 
-const treatments = [
-  { name: "Brow Shape & Tidy", description: "Expert shaping to define and enhance your natural brow arch using precise waxing and tweezing techniques.", duration: "20 min", price: "From $25" },
-  { name: "Brow Tint", description: "Semi-permanent colour application to deepen brow definition and fill in sparse areas for fuller-looking brows.", duration: "15 min", price: "From $22" },
-  { name: "Brow Shape & Tint Combo", description: "The perfect pairing — clean shaping with colour enhancement for beautifully defined brows.", duration: "30 min", price: "From $42" },
-  { name: "Lash Tint", description: "A gentle semi-permanent dye that darkens and defines your natural lashes, eliminating the need for mascara.", duration: "20 min", price: "From $30" },
-  { name: "Lash Lift", description: "A semi-permanent treatment that curls and lifts your natural lashes from root to tip for an open, wide-eyed look that lasts 6-8 weeks.", duration: "45 min", price: "From $75" },
-  { name: "Lash Lift & Tint Combo", description: "The ultimate lash enhancement — lift, curl, and colour in one appointment for dramatic, mascara-free beauty.", duration: "60 min", price: "From $95" },
-];
-
 const aftercare = [
-  "Do not wet lashes for the first 24 hours after a lash lift.",
-  "Avoid rubbing or touching your eyes.",
-  "Do not use waterproof mascara for 48 hours.",
-  "Avoid steam rooms, saunas, and swimming pools for 24–48 hours.",
-  "Use a clean spoolie brush to gently groom lashes each morning.",
-  "Avoid oil-based products around the eye area.",
-  "Results typically last 6–8 weeks.",
+  "Keep Lashes Dry: Avoid water, steam, sweating, and saunas for the first 24 hours.",
+  "Gentle Cleansing: After 24 hours, wash your face carefully and avoid oil-based cleansers near your eyes.",
+  "No Oils or Waterproof Mascara: Oil-based products and waterproof mascara can weaken the lift and tint.",
+  "Hands Off: Don't rub or pull on your lashes.",
+  "Brush & Condition: Apply a lash conditioner or serum to keep them healthy.",
+  "Protect & Preserve: Wear sunglasses in the sun, avoid excessive heat/steam, and try to sleep on your back to maintain their shape.",
 ];
 
 const BrowsLashes = () => {
@@ -27,7 +18,7 @@ const BrowsLashes = () => {
     <Layout>
       <section className="relative py-24 lg:py-32">
         <div className="absolute inset-0">
-          <img src={browsImg} alt="Professional brow and lash tools" className="w-full h-full object-cover" loading="eager" />
+          <img src={browsImg} alt="Professional brow and lash services Georgetown" className="w-full h-full object-cover" loading="eager" />
           <div className="absolute inset-0 bg-spa-charcoal/60" />
         </div>
         <div className="relative z-10 container mx-auto px-4 lg:px-8 text-center">
@@ -45,29 +36,19 @@ const BrowsLashes = () => {
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
           <div className="bg-spa-blush/50 rounded-2xl p-6 mb-10 text-center">
             <p className="font-body text-sm text-foreground">
-              <strong>Please Note:</strong> Arrive makeup-free for all lash tinting, lash lift, and facial treatments for the best results.
+              <strong>Please Note:</strong> For the best results and optimal experience, we kindly ask that you arrive makeup-free for massages, facials, lash tinting, lash lifts, and light therapy treatments.
             </p>
           </div>
 
-          <div className="space-y-6">
-            {treatments.map((t, i) => (
-              <motion.div key={t.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="bg-spa-cream rounded-2xl p-8 shadow-soft">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="font-heading text-xl font-semibold text-foreground mb-2">{t.name}</h3>
-                    <p className="font-body text-sm text-muted-foreground leading-relaxed">{t.description}</p>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <p className="font-body text-sm font-medium text-foreground">{t.price}</p>
-                    <p className="font-body text-xs text-muted-foreground">{t.duration}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="bg-spa-cream rounded-2xl p-8 shadow-soft text-center mb-10">
+            <h3 className="font-heading text-xl font-semibold text-foreground mb-3">Brow & Lash Services</h3>
+            <p className="font-body text-sm text-muted-foreground leading-relaxed">
+              We offer brow shaping, brow tinting, lash tinting, lash lifts, and combination services. Please call for pricing and availability.
+            </p>
           </div>
 
           {/* Aftercare */}
-          <div className="mt-16">
+          <div className="mt-8">
             <h2 className="font-heading text-2xl font-semibold text-foreground mb-6 text-center">Lash Lift & Tint Aftercare</h2>
             <div className="bg-spa-sage-light rounded-2xl p-8">
               <div className="space-y-3">
@@ -81,7 +62,17 @@ const BrowsLashes = () => {
             </div>
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="mt-8 flex flex-wrap gap-3 justify-center text-center">
+            <Link to="/facials" className="font-body text-sm text-primary hover:underline">Facials</Link>
+            <span className="text-muted-foreground">•</span>
+            <Link to="/medical-aesthetics" className="font-body text-sm text-primary hover:underline">Medical Aesthetics (Botox)</Link>
+            <span className="text-muted-foreground">•</span>
+            <Link to="/hair-removal" className="font-body text-sm text-primary hover:underline">Hair Removal</Link>
+            <span className="text-muted-foreground">•</span>
+            <Link to="/gentlemens-spa" className="font-body text-sm text-primary hover:underline">Men's Services</Link>
+          </div>
+
+          <div className="mt-8 text-center">
             <a href="tel:905-873-4907" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-body text-sm font-semibold">
               <Phone className="w-4 h-4" /> Book Your Appointment
             </a>
