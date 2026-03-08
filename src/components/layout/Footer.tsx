@@ -44,7 +44,11 @@ const Footer = () => {
                 { label: "Hand & Foot Care", path: "/hand-foot-care" },
                 { label: "Brows & Lashes", path: "/brows-lashes" },
                 { label: "Hair Removal", path: "/hair-removal" },
-                { label: "Gentlemen's Spa", path: "/gentlemens-spa" },
+                { label: "Men's Spa", path: "/gentlemens-spa" },
+                { label: "Plexr Plus", path: "/plexr-plus" },
+                { label: "Medical Aesthetics", path: "/medical-aesthetics" },
+                { label: "Wellness Room", path: "/wellness-room" },
+                { label: "Gift Certificates", path: "/gift-certificates" },
               ].map((l) => (
                 <li key={l.path}>
                   <Link to={l.path} className="font-body text-sm opacity-70 hover:opacity-100 transition-opacity">
