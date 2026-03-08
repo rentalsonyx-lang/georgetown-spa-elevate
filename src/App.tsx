@@ -17,6 +17,18 @@ import GentlemensSpa from "./pages/GentlemensSpa";
 import Policies from "./pages/Policies";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import PlexrPlus from "./pages/PlexrPlus";
+import MedicalAesthetics from "./pages/MedicalAesthetics";
+import TraditionalChineseMedicine from "./pages/TraditionalChineseMedicine";
+import Reiki from "./pages/Reiki";
+import Osteopathy from "./pages/Osteopathy";
+import RaindropTherapy from "./pages/RaindropTherapy";
+import HydroDermPro from "./pages/HydroDermPro";
+import MarmaEnergyFacial from "./pages/MarmaEnergyFacial";
+import MicroNeedling from "./pages/MicroNeedling";
+import WellnessRoom from "./pages/WellnessRoom";
+import GiftCertificates from "./pages/GiftCertificates";
+import OurTeam from "./pages/OurTeam";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +57,18 @@ const App = () => (
           <Route path="/gentlemens-spa" element={<GentlemensSpa />} />
           <Route path="/policies" element={<Policies />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/plexr-plus" element={<PlexrPlus />} />
+          <Route path="/medical-aesthetics" element={<MedicalAesthetics />} />
+          <Route path="/traditional-chinese-medicine" element={<TraditionalChineseMedicine />} />
+          <Route path="/reiki" element={<Reiki />} />
+          <Route path="/osteopathy" element={<Osteopathy />} />
+          <Route path="/raindrop-therapy" element={<RaindropTherapy />} />
+          <Route path="/hydroderm-pro" element={<HydroDermPro />} />
+          <Route path="/marma-energy-facial" element={<MarmaEnergyFacial />} />
+          <Route path="/micro-needling" element={<MicroNeedling />} />
+          <Route path="/wellness-room" element={<WellnessRoom />} />
+          <Route path="/gift-certificates" element={<GiftCertificates />} />
+          <Route path="/our-team" element={<OurTeam />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
