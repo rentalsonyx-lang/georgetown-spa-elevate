@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import massageImg from "@/assets/massage-service.jpg";
-import facialImg from "@/assets/facial-service.jpg";
+import facialImg from "@/assets/Facial.png"; // <-- Updated this line
 import handFootImg from "@/assets/handfoot-service.jpg";
 import browsImg from "@/assets/brows-service.jpg";
 import hairRemovalImg from "@/assets/hairremoval-service.jpg";
