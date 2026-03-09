@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, Phone, CalendarHeart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/logo.png"; // Make sure to import the logo
+import logo from "@/assets/logo.png";
 
 // Grouped Service Links
 const serviceLinks = [
@@ -60,4 +60,164 @@ const Header = () => {
       {/* Tiny integrated top bar */}
       <div className="hidden sm:flex bg-muted/30 border-b border-border py-1.5 px-4 lg:px-8 justify-between items-center text-[11px] font-body text-muted-foreground tracking-wide">
         <span className="flex items-center gap-1.5"><CalendarHeart className="w-3 h-3"/> By appointment only • Women-Owned</span>
-        <a href="tel:905-873-4907" className="hover:text-foreground transition-colors">Call us
+        <a href="tel:905-873-4907" className="hover:text-foreground transition-colors">Call us: 905-873-4907</a>
+      </div>
+
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="flex items-center justify-between h-16 lg:h-20">
+          
+          {/* Logo Area */}
+          <Link to="/" className="flex items-center shrink-0 w-32 sm:w-40 lg:w-48 h-full">
+            <AnimatePresence>
+              {showHeaderLogo && (
+                <motion.img
+                  initial={{ opacity: 0, y: -15, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -15, scale: 0.95 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  src={logo}
+                  alt="Business Logo"
+                  className="h-10 lg:h-12 w-auto object-contain drop-shadow-sm"
+                />
+              )}
+            </AnimatePresence>
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-2">
+            {navLinks.map((link) => (
+              <div key={link.path + link.label} className="relative group">
+                {link.children ? (
+                  <button
+                    className={`px-3 py-2 font-body text-sm tracking-wide transition-colors flex items-center gap-1 rounded-md
+                      ${isChildActive(link.children)
+                        ? "text-foreground font-medium"
+                        : "text-muted-foreground hover:text-foreground"
+                      }`}
+                  >
+                    {link.label}
+                    <ChevronDown className="w-3.5 h-3.5 opacity-70 group-hover:rotate-180 transition-transform duration-200" />
+                  </button>
+                ) : (
+                  <Link
+                    to={link.path}
+                    className={`px-3 py-2 font-body text-sm tracking-wide transition-colors rounded-md
+                      ${location.pathname === link.path
+                        ? "text-foreground font-medium"
+                        : "text-muted-foreground hover:text-foreground"
+                      }`}
+                  >
+                    {link.label}
+                  </Link>
+                )}
+
+                {/* Dropdown Menu */}
+                {link.children && (
+                  <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0">
+                    <div className="bg-background rounded-lg shadow-lg border border-border py-2 min-w-[220px]">
+                      {link.children.map((child) => (
+                        <Link
+                          key={child.path}
+                          to={child.path}
+                          className="block px-5 py-2.5 font-body text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+
+          {/* CTA */}
+          <a
+            href="tel:905-873-4907"
+            className="hidden lg:inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-body text-xs font-medium tracking-wide hover:shadow-md transition-all shrink-0"
+          >
+            <Phone className="w-3.5 h-3.5" />
+            Book Now
+          </a>
+
+          {/* Mobile Toggle */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="lg:hidden p-2 text-foreground"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-background border-t border-border overflow-hidden max-h-[80vh] overflow-y-auto"
+          >
+            <nav className="container mx-auto px-4 py-4 space-y-1">
+              {navLinks.map((link) => (
+                <div key={link.path + link.label}>
+                  {link.children ? (
+                    <>
+                      <button
+                        onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
+                        className="w-full flex items-center justify-between px-3 py-3 font-body text-sm text-foreground font-medium"
+                      >
+                        {link.label}
+                        <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === link.label ? "rotate-180" : ""}`} />
+                      </button>
+                      <AnimatePresence>
+                        {openDropdown === link.label && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="overflow-hidden bg-muted/30 rounded-lg mx-2 mb-2"
+                          >
+                            {link.children.map((child) => (
+                              <Link
+                                key={child.path}
+                                to={child.path}
+                                onClick={() => setMobileOpen(false)}
+                                className="block pl-6 pr-3 py-3 font-body text-sm text-muted-foreground hover:text-foreground"
+                              >
+                                {child.label}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      onClick={() => setMobileOpen(false)}
+                      className="block px-3 py-3 font-body text-sm text-foreground font-medium"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
+                </div>
+              ))}
+              <a
+                href="tel:905-873-4907"
+                className="flex items-center justify-center gap-2 mt-6 bg-primary text-primary-foreground px-5 py-3 rounded-full font-body text-sm font-medium"
+              >
+                <Phone className="w-4 h-4" />
+                Call to Book
+              </a>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+};
+
+export default Header;
